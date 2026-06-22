@@ -4,8 +4,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
+import { Avatar, Button } from "@heroui/react";
 
 export default function Navbar() {
+    const { data: session } = authClient.useSession();
+    console.log(session,"meri")
+  const user = session?.user;
+
+   const handleSignOut = async () => {
+    await authClient.signOut();
+  }; 
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -80,12 +89,40 @@ export default function Navbar() {
           />
 
           {/* Login */}
-          <Link
-            href="/login"
-            className="rounded-lg bg-blue-600 px-4 py-2 text-white"
-          >
-            Login
-          </Link>
+    
+           {user ? (
+          <div className="flex items-center gap-3">
+
+            {/* Avatar */}
+            <Avatar>
+              <Avatar.Image
+                referrerPolicy="no-referrer"
+                src={user?.image}
+              />
+              <Avatar.Fallback>
+                {user?.name?.[0]}
+              </Avatar.Fallback>
+            </Avatar>
+             <li>
+                  <Button
+                    onClick={handleSignOut}
+                    variant="gost"
+                    className="mt-2 w-full"
+                  >
+                    Logout
+                  </Button>
+                </li>
+
+            {/* Dropdown */}
+         
+          </div>
+        ) : (
+          <div className="hidden lg:flex gap-3">
+            <Link href="/login">Login</Link>
+            <Link href="/signup">SignUp</Link>
+          </div>
+        )}
+       
         </div>
 
         {/* Mobile Button */}
@@ -132,6 +169,13 @@ export default function Navbar() {
             className="block rounded-lg bg-blue-600 py-2 text-center text-white"
           >
             Login
+          </Link>
+
+            <Link
+            href="/signup"
+            className="block rounded-lg bg-blue-600 py-2 text-center text-white"
+          >
+            SignUp
           </Link>
         </div>
       )}

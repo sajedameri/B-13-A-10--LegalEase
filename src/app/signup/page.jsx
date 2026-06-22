@@ -30,7 +30,7 @@ const signUpPage = () => {
        email:user.email,
         password:user.password,
         name:user.name,
-        image:user.image,
+       
         callbackURL:"/login"
 
     })
