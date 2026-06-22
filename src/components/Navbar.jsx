@@ -8,7 +8,7 @@ import { authClient } from "@/lib/auth-client";
 import { Avatar, Button } from "@heroui/react";
 
 export default function Navbar() {
-    const { data: session } = authClient.useSession();
+    const { data: session,isPending } = authClient.useSession();
     console.log(session,"meri")
   const user = session?.user;
 
@@ -16,7 +16,11 @@ export default function Navbar() {
     await authClient.signOut();
   }; 
   const pathname = usePathname();
+  if(pathname.includes('dashboard')){
+    return null;
+  }
   const [open, setOpen] = useState(false);
+
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow">
