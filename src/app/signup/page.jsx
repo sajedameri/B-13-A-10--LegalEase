@@ -1,7 +1,7 @@
 "use client"
 
 
-import { Card } from "@heroui/react";
+import { Card, ListBox } from "@heroui/react";
 import React from "react";
 import {
   Button,
@@ -11,6 +11,7 @@ import {
   Input,
   Label,
   TextField,
+  Select,
 } from "@heroui/react";
 import { toast, ToastContainer } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
@@ -26,11 +27,13 @@ const signUpPage = () => {
     const user = Object.fromEntries(formData.entries());
     console.log(user)
     const { data, error } = await authClient.signUp.email({
+      ...user,
+      plan:"free",
 
        email:user.email,
         password:user.password,
         name:user.name,
-       
+        image:user.image,
         callbackURL:"/login"
 
     })
@@ -121,6 +124,29 @@ const signUpPage = () => {
             </Description>
             <FieldError />
           </TextField>
+
+   <Select isRequired name="role" className="w-full" placeholder="Select one">
+      <Label>SignUp As Role</Label>
+      <Select.Trigger>
+        <Select.Value />
+        <Select.Indicator />
+      </Select.Trigger>
+      <Select.Popover>
+        <ListBox>
+          <ListBox.Item id="client" textValue="client">
+          Client
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+          <ListBox.Item id="lawyer" textValue="lawyer">
+            Lawyer
+            <ListBox.ItemIndicator />
+          </ListBox.Item>
+         
+          
+        
+        </ListBox>
+      </Select.Popover>
+    </Select>
           <div className="flex justify-center  gap-2">
           <Link href={"/login"}>
             <Button className={"w-full"} type="submit" >
