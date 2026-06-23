@@ -1,9 +1,37 @@
 
 
+import { auth } from "@/lib/auth";
 import {Bars, Bell, Envelope, Gear, House, Magnifier, Person} from "@gravity-ui/icons";
 import {Button, Drawer} from "@heroui/react";
+import { ChartArea, UserCheck2 } from "lucide-react";
+import { headers } from "next/headers";
+import { BiMoney } from "react-icons/bi";
+import { TbAsset } from "react-icons/tb";
 
-export function DashboardSidebar() {
+export async function DashboardSidebar() {
+  const session = await auth.api.getSession({
+    headers:await headers()
+  })
+  const user = session?.user
+  const role = user?.role ||"client"
+  console.log(user)
+  const DashboardItam = {
+     lawyer:[
+ {icon: ChartArea, label: "Overview", link:"/dashboard/seller"},
+  {icon: TbAsset, label: "Products" ,link:"/dashboard/seller/products"},
+   {icon: BiMoney, label: "Transection",link:"/dashboard/seller/transection"},
+      ],
+         client:[
+ {icon: ChartArea, label: "Overview", link:"/dashboard/client"},
+  {icon: TbAsset, label: "Products" ,link:"/dashboard/client/products"},
+   {icon: BiMoney, label: "Transection",link:"/dashboard/client/transection"},
+      ],
+              admin:[
+ {icon: ChartArea, label: "Overview", link:"/dashboard/client"},
+  {icon: UserCheck2, label: "User Manege" ,link:"/dashboard/client/products"},
+   {icon: BiMoney, label: "Transection",link:"/dashboard/client/transection"},
+      ],
+  }
   const navItems = [
     {icon: House, label: "Home"},
     {icon: Magnifier, label: "Search"},
