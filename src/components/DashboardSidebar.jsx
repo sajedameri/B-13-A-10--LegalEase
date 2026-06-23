@@ -1,10 +1,10 @@
-import type {ComponentType, SVGProps} from "react";
+
 
 import {Bars, Bell, Envelope, Gear, House, Magnifier, Person} from "@gravity-ui/icons";
 import {Button, Drawer} from "@heroui/react";
 
 export function DashboardSidebar() {
-  const navItems: {icon: ComponentType<SVGProps<SVGSVGElement>>; label: string}[] = [
+  const navItems = [
     {icon: House, label: "Home"},
     {icon: Magnifier, label: "Search"},
     {icon: Bell, label: "Notifications"},
