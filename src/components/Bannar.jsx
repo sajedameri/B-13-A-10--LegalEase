@@ -7,8 +7,8 @@ const Bannar = () => {
   <div className="hero-content flex-col lg:flex-row-reverse">
    <div className=''>
      <img
-      src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-      className="max-w-xl rounded-lg shadow-2xl"
+      src="/photo.webp"
+      className="max-w-sm rounded-lg shadow-2xl"
     />
    </div>
     <div>
@@ -22,7 +22,7 @@ const Bannar = () => {
        Connect with verified lawyers, explore legal services,
             and hire professionals securely from anywhere.
       </p>
-      <button className="btn btn-primary">Booking Now</button>
+      <button className="btn btn-primary">Browse Lawyers</button>
     </div>
   </div>
 </div>

@@ -15,12 +15,14 @@ export function DashboardSidebar() {
 
   return (
     <Drawer>
-      <Button className={hidden} variant="secondary">
+      <Button className={"hidden"} variant="secondary">
         <Bars />
         Menu
       </Button>
+      
 
-         <nav className="flex flex-col gap-1 w-[200px] border border-right-1">
+         <nav className="flex flex-col gap-1 w-[200px] border border-right-1 pt-5">
+               <h1 className="text-3xl font-bold text-blue-600 py-3"> LegalEase</h1>
                 {navItems.map((item) => (
                   <button
                     key={item.label}
