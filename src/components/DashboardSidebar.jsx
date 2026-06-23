@@ -15,10 +15,23 @@ export function DashboardSidebar() {
 
   return (
     <Drawer>
-      <Button variant="secondary">
+      <Button className={hidden} variant="secondary">
         <Bars />
         Menu
       </Button>
+
+         <nav className="flex flex-col gap-1 w-[200px] border border-right-1">
+                {navItems.map((item) => (
+                  <button
+                    key={item.label}
+                    className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
+                    type="button"
+                  >
+                    <item.icon className="size-5 text-muted" />
+                    {item.label}
+                  </button>
+                ))}
+              </nav>
       <Drawer.Backdrop>
         <Drawer.Content placement="left">
           <Drawer.Dialog>
