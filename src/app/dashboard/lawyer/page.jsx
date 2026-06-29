@@ -3,7 +3,7 @@ import React from 'react';
 const SellerDashboardHomePage = () => {
   return (
     <div>
-      Seller Dashboard Homepage
+    Lawyer Dashboard Home Page
     </div>
   );
 };

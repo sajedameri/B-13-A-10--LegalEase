@@ -1,7 +1,9 @@
 "use client"
+import {Eye, EyeSlash} from "@gravity-ui/icons";
+// import {Button, InputGroup, Label, TextField} from "@heroui/react";
+import {useState} from "react";
 
-
-import { Card, ListBox } from "@heroui/react";
+import { Card, InputGroup, ListBox } from "@heroui/react";
 import React from "react";
 import {
   Button,
@@ -20,6 +22,7 @@ import { FcGoogle } from "react-icons/fc";
 
 
 const signUpPage = () => {
+   const [isVisible, setIsVisible] = useState(false);
 
   const onSubmit =async (e)=>{
     e.preventDefault();
@@ -34,6 +37,7 @@ const signUpPage = () => {
         password:user.password,
         name:user.name,
         image:user.image,
+        
         callbackURL:"/login"
 
     })
@@ -104,6 +108,7 @@ const signUpPage = () => {
             minLength={8}
             name="password"
             type="password"
+         
             validate={(value) => {
               if (value.length < 8) {
                 return "Password must be at least 8 characters";
@@ -118,12 +123,38 @@ const signUpPage = () => {
             }}
           >
             <Label>Password</Label>
+            
+           
             <Input placeholder="Enter your password" />
+          
             <Description>
               Must be at least 8 characters with 1 uppercase and 1 number
             </Description>
             <FieldError />
           </TextField>
+
+           <TextField className="w-full " name="password">
+      <Label>Confirm Password</Label>
+       
+      <InputGroup>
+        <InputGroup.Input
+          className="w-full"
+          type={isVisible ? "text" : "password"}
+          // value={isVisible ? "87$2h.3diua" : "••••••••"}
+        />
+        <InputGroup.Suffix className="pr-0">
+          <Button
+            isIconOnly
+            aria-label={isVisible ? "Hide password" : "Show password"}
+            size="sm"
+            variant="ghost"
+            onPress={() => setIsVisible(!isVisible)}
+          >
+            {isVisible ? <Eye className="size-4" /> : <EyeSlash className="size-4" />}
+          </Button>
+        </InputGroup.Suffix>
+      </InputGroup>
+    </TextField>
 
    <Select isRequired name="role" className="w-full" placeholder="Select one">
       <Label>SignUp As Role</Label>

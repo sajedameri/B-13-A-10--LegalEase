@@ -11,7 +11,7 @@ export default function Navbar() {
     const { data: session,isPending } = authClient.useSession();
     console.log(session,"meri")
   const user = session?.user;
-
+  const [open, setOpen] = useState(false);
    const handleSignOut = async () => {
     await authClient.signOut();
   }; 
@@ -19,7 +19,7 @@ export default function Navbar() {
   if(pathname.includes('dashboard')){
     return null;
   }
-  const [open, setOpen] = useState(false);
+
 
 
   return (
@@ -55,35 +55,38 @@ export default function Navbar() {
           </Link>
 
           {/* Dashboard Dropdown */}
-          <div className="group relative">
-            <button className="flex items-center gap-1 text-gray-700">
-              Dashboard
-              <ChevronDown size={18} />
-            </button>
+<div className="group relative">
+  <button className="flex items-center gap-1 text-gray-700">
+    Dashboard
+    <ChevronDown size={18} />
+  </button>
 
-            <div className="absolute top-10 hidden w-48 rounded-lg bg-white p-2 shadow-lg group-hover:block">
-              <Link
-                href="/dashboard/user"
-                className="block rounded px-3 py-2 hover:bg-gray-100 text-gray-900"
-              >
-                User Dashboard
-              </Link>
+  <div className="absolute top-full mt-2 w-48 rounded-lg bg-white p-2 shadow-lg 
+                  invisible opacity-0 transition-all duration-200
+                  group-hover:visible group-hover:opacity-100">
+    
+    <Link
+      href="/dashboard/client"
+      className="block rounded px-3 py-2 hover:bg-gray-100 text-gray-900"
+    >
+     Client Dashboard
+    </Link>
 
-              <Link
-                href="/dashboard/lawyer"
-                className="block rounded px-3 py-2 hover:bg-gray-100 text-gray-900"
-              >
-                Lawyer Dashboard
-              </Link>
+    <Link
+      href="/dashboard/lawyer"
+      className="block rounded px-3 py-2 hover:bg-gray-100 text-gray-900"
+    >
+      Lawyer Dashboard
+    </Link>
 
-              <Link
-                href="/dashboard/admin"
-                className="block rounded px-3 py-2 hover:bg-gray-100 text-gray-900"
-              >
-                Admin Dashboard
-              </Link>
-            </div>
-          </div>
+    <Link
+      href="/dashboard/admin"
+      className="block rounded px-3 py-2 hover:bg-gray-100 text-gray-900"
+    >
+      Admin Dashboard
+    </Link>
+  </div>
+</div>
 
           {/* Search */}
           <input
@@ -110,7 +113,7 @@ export default function Navbar() {
              <li>
                   <Button
                     onClick={handleSignOut}
-                    variant="gost"
+                    variant="ghost"
                     className="mt-2 w-full"
                   >
                     Logout
