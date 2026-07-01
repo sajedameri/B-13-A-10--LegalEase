@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "format": "prettier --write '**/*.{js,jsx,json}'"
   },
   "dependencies": {
     "@better-auth/mongo-adapter": "^1.6.20",
@@ -29,6 +30,7 @@
     "daisyui": "^5.5.23",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "prettier": "^3.9.3",
     "tailwindcss": "^4"
   }
 }

@@ -1,26 +1,24 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown } from "lucide-react";
-import { useState } from "react";
-import { authClient } from "@/lib/auth-client";
-import { Avatar, Button } from "@heroui/react";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import { useState } from 'react';
+import { authClient } from '@/lib/auth-client';
+import { Avatar, Button } from '@heroui/react';
 
 export default function Navbar() {
-    const { data: session,isPending } = authClient.useSession();
-    console.log(session,"meri")
+  const { data: session, isPending } = authClient.useSession();
+  console.log(session, 'meri');
   const user = session?.user;
   const [open, setOpen] = useState(false);
-   const handleSignOut = async () => {
+  const handleSignOut = async () => {
     await authClient.signOut();
-  }; 
+  };
   const pathname = usePathname();
-  if(pathname.includes('dashboard')){
+  if (pathname.includes('dashboard')) {
     return null;
   }
-
-
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow">
@@ -34,11 +32,7 @@ export default function Navbar() {
         <div className="hidden items-center gap-6 md:flex">
           <Link
             href="/"
-            className={
-              pathname === "/"
-                ? "font-semibold text-blue-600"
-                : "text-gray-700"
-            }
+            className={pathname === '/' ? 'font-semibold text-blue-600' : 'text-gray-700'}
           >
             Home
           </Link>
@@ -46,47 +40,46 @@ export default function Navbar() {
           <Link
             href="/browse-lawyers"
             className={
-              pathname === "/browse-lawyers"
-                ? "font-semibold text-blue-600"
-                : "text-gray-700"
+              pathname === '/browse-lawyers' ? 'font-semibold text-blue-600' : 'text-gray-700'
             }
           >
             Browse Lawyers
           </Link>
 
           {/* Dashboard Dropdown */}
-<div className="group relative">
-  <button className="flex items-center gap-1 text-gray-700">
-    Dashboard
-    <ChevronDown size={18} />
-  </button>
+          <div className="group relative">
+            <button className="flex items-center gap-1 text-gray-700">
+              Dashboard
+              <ChevronDown size={18} />
+            </button>
 
-  <div className="absolute top-full mt-2 w-48 rounded-lg bg-white p-2 shadow-lg 
+            <div
+              className="absolute top-full mt-2 w-48 rounded-lg bg-white p-2 shadow-lg
                   invisible opacity-0 transition-all duration-200
-                  group-hover:visible group-hover:opacity-100">
-    
-    <Link
-      href="/dashboard/client"
-      className="block rounded px-3 py-2 hover:bg-gray-100 text-gray-900"
-    >
-     Client Dashboard
-    </Link>
+                  group-hover:visible group-hover:opacity-100"
+            >
+              <Link
+                href="/dashboard/client"
+                className="block rounded px-3 py-2 hover:bg-gray-100 text-gray-900"
+              >
+                Client Dashboard
+              </Link>
 
-    <Link
-      href="/dashboard/lawyer"
-      className="block rounded px-3 py-2 hover:bg-gray-100 text-gray-900"
-    >
-      Lawyer Dashboard
-    </Link>
+              <Link
+                href="/dashboard/lawyer"
+                className="block rounded px-3 py-2 hover:bg-gray-100 text-gray-900"
+              >
+                Lawyer Dashboard
+              </Link>
 
-    <Link
-      href="/dashboard/admin"
-      className="block rounded px-3 py-2 hover:bg-gray-100 text-gray-900"
-    >
-      Admin Dashboard
-    </Link>
-  </div>
-</div>
+              <Link
+                href="/dashboard/admin"
+                className="block rounded px-3 py-2 hover:bg-gray-100 text-gray-900"
+              >
+                Admin Dashboard
+              </Link>
+            </div>
+          </div>
 
           {/* Search */}
           <input
@@ -96,47 +89,32 @@ export default function Navbar() {
           />
 
           {/* Login */}
-    
-           {user ? (
-          <div className="flex items-center gap-3">
 
-            {/* Avatar */}
-            <Avatar>
-              <Avatar.Image
-                referrerPolicy="no-referrer"
-                src={user?.image}
-              />
-              <Avatar.Fallback>
-                {user?.name?.[0]}
-              </Avatar.Fallback>
-            </Avatar>
-             <li>
-                  <Button
-                    onClick={handleSignOut}
-                    variant="ghost"
-                    className="mt-2 w-full"
-                  >
-                    Logout
-                  </Button>
-                </li>
+          {user ? (
+            <div className="flex items-center gap-3">
+              {/* Avatar */}
+              <Avatar>
+                <Avatar.Image referrerPolicy="no-referrer" src={user?.image} />
+                <Avatar.Fallback>{user?.name?.[0]}</Avatar.Fallback>
+              </Avatar>
+              <li>
+                <Button onClick={handleSignOut} variant="ghost" className="mt-2 w-full">
+                  Logout
+                </Button>
+              </li>
 
-            {/* Dropdown */}
-         
-          </div>
-        ) : (
-          <div className="hidden lg:flex gap-3">
-            <Link href="/login">Login</Link>
-            <Link href="/signup">SignUp</Link>
-          </div>
-        )}
-       
+              {/* Dropdown */}
+            </div>
+          ) : (
+            <div className="hidden lg:flex gap-3">
+              <Link href="/login">Login</Link>
+              <Link href="/signup">SignUp</Link>
+            </div>
+          )}
         </div>
 
         {/* Mobile Button */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden text-gray-900"
-        >
+        <button onClick={() => setOpen(!open)} className="md:hidden text-gray-900">
           {open ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
@@ -144,24 +122,15 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {open && (
         <div className="space-y-4 border-t bg-white p-5 md:hidden text-gray-900">
-          <Link
-            href="/"
-            className="block"
-          >
+          <Link href="/" className="block">
             Home
           </Link>
 
-          <Link
-            href="/browse-lawyers"
-            className="block"
-          >
+          <Link href="/browse-lawyers" className="block">
             Browse Lawyers
           </Link>
 
-          <Link
-            href="/dashboard"
-            className="block"
-          >
+          <Link href="/dashboard" className="block">
             Dashboard
           </Link>
 
@@ -171,17 +140,11 @@ export default function Navbar() {
             className="w-full rounded-lg border px-4 py-2"
           />
 
-          <Link
-            href="/login"
-            className="block rounded-lg bg-blue-600 py-2 text-center text-white"
-          >
+          <Link href="/login" className="block rounded-lg bg-blue-600 py-2 text-center text-white">
             Login
           </Link>
 
-            <Link
-            href="/signup"
-            className="block rounded-lg bg-blue-600 py-2 text-center text-white"
-          >
+          <Link href="/signup" className="block rounded-lg bg-blue-600 py-2 text-center text-white">
             SignUp
           </Link>
         </div>
