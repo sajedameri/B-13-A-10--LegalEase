@@ -18,7 +18,7 @@ const loginPage = () => {
       email: user.email,
       password: user.password,
 
-      callbackURL: '/login',
+      callbackURL: '/',
     });
     console.log({ data, error });
 

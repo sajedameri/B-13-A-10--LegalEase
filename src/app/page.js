@@ -1,11 +1,21 @@
 import Banner from '@/components/Bannar';
-import BannerContent from '@/components/BannerContent';
+import FeaturedLawyers from '@/components/FeaturedLawyers';
+import LegalCategories from '@/components/LegalCategories';
+import TopLegalExperts from '@/components/TopLegalExperts';
+
+
+
 
 export default function Home() {
+ 
+  
   return (
     <div>
       <Banner />
-      <BannerContent />
+     <FeaturedLawyers  />
+<TopLegalExperts/>
+ <LegalCategories />
+     
     </div>
   );
 }

@@ -7,6 +7,10 @@ import {
   House,
   Magnifier,
   Person,
+  LayoutCellsLarge,
+  PersonPlus,
+  PersonFill,
+  Receipt,
 } from '@gravity-ui/icons';
 import { Button, Drawer } from '@heroui/react';
 import { ChartArea, UserCheck2 } from 'lucide-react';
@@ -23,16 +27,28 @@ export async function DashboardSidebar() {
   const role = user?.role || 'client';
   console.log(user);
   const dashboardItems = {
-    lawyer: [
-      { icon: ChartArea, label: 'Home', link: '/dashboard/lawyer' },
-      { icon: ChartArea, label: 'New hiring', link: '/dashboard/lawyer/new-hiring' },
-      {
-        icon: TbAsset,
-        label: 'Profile Management ',
-        link: '/dashboard/lawyer/manage-legal-profile',
-      },
-      { icon: BiMoney, label: 'Hiring history', link: '/dashboard/lawyer/hiring' },
-    ],
+   lawyer :[
+  { 
+    icon: LayoutCellsLarge, // Changed from LayoutFeed
+    label: 'Home', 
+    link: '/dashboard/lawyer' 
+  },
+  { 
+    icon: PersonPlus, 
+    label: 'New Hiring Requests', 
+    link: '/dashboard/lawyer/new-hiring' 
+  },
+  {
+    icon: PersonFill,
+    label: 'Profile Management',
+    link: '/dashboard/lawyer/manage-legal-profile',
+  },
+  { 
+    icon: Receipt, 
+    label: 'Hiring History', 
+    link: '/dashboard/lawyer/hiring' 
+  },
+],
     client: [
       { icon: ChartArea, label: 'My Profile', link: '/dashboard/client' },
       { icon: TbAsset, label: 'Hiring History', link: '/dashboard/client/hiring-history' },
@@ -71,9 +87,24 @@ export async function DashboardSidebar() {
 
   return (
     <>
-      <aside className="hidden w-64 shrink-0 border-r border-default p-4 lg:block">
-        {navconten}
-      </aside>
+     <aside className="hidden w-64 shrink-0 border-r border-default lg:block">
+
+  {/* Company Logo */}
+  <div className="flex items-center gap-3 border-b border-default px-4 py-5">
+    
+
+    <div>
+      <h2 className="text-xl font-bold">LegalEase</h2>
+      <p className="text-xs text-gray-500">Lawyer Dashboard</p>
+    </div>
+  </div>
+
+  {/* Sidebar Menu */}
+  <div className="p-4">
+    {navconten}
+  </div>
+
+</aside>
       <Drawer>
         <Button className="lg:hidden" variant="secondary">
           <LayoutSideContentLeft />

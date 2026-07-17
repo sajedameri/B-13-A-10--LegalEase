@@ -11,6 +11,7 @@ export default function Navbar() {
   const { data: session, isPending } = authClient.useSession();
   console.log(session, 'meri');
   const user = session?.user;
+
   const [open, setOpen] = useState(false);
   const handleSignOut = async () => {
     await authClient.signOut();
@@ -19,6 +20,7 @@ export default function Navbar() {
   if (pathname.includes('dashboard')) {
     return null;
   }
+ 
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow">
@@ -47,18 +49,21 @@ export default function Navbar() {
           </Link>
 
           {/* Dashboard Dropdown */}
-          <div className="group relative">
-            <button className="flex items-center gap-1 text-gray-700">
+        {
+          user && 
+            <div className="group relative">
+            <Link  href ={`/dashboard/${user?.role}`}className="flex items-center gap-1 text-gray-700">
               Dashboard
+             
               <ChevronDown size={18} />
-            </button>
+            </Link>
 
             <div
               className="absolute top-full mt-2 w-48 rounded-lg bg-white p-2 shadow-lg
                   invisible opacity-0 transition-all duration-200
                   group-hover:visible group-hover:opacity-100"
             >
-              <Link
+              {/* <Link
                 href="/dashboard/client"
                 className="block rounded px-3 py-2 hover:bg-gray-100 text-gray-900"
               >
@@ -77,9 +82,10 @@ export default function Navbar() {
                 className="block rounded px-3 py-2 hover:bg-gray-100 text-gray-900"
               >
                 Admin Dashboard
-              </Link>
+              </Link> */}
             </div>
           </div>
+        }
 
           {/* Search */}
           <input

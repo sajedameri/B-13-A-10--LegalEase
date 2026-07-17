@@ -37,7 +37,7 @@ const signUpPage = () => {
       name: user.name,
       image: user.image,
 
-      callbackURL: '/login',
+      callbackURL: '/',
     });
     console.log({ data, error });
 
@@ -47,7 +47,7 @@ const signUpPage = () => {
 
     if (data) {
       toast.success('Signup successful!');
-      window.location.href = '/login';
+      window.location.href = '/';
     }
   };
   const handleGoogleSignin = async () => {
@@ -114,7 +114,7 @@ const signUpPage = () => {
             <FieldError />
           </TextField>
 
-          <TextField className="w-full " name="password">
+          <TextField className="w-full " name="confirmPassword">
             <Label>Confirm Password</Label>
 
             <InputGroup>
